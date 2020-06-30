@@ -155,6 +155,9 @@ app.use("/", authRouter);
 const favouriteWordRouter = require("./routers/favouriteWord");
 app.use("/favouritewords", favouriteWordRouter);
 
+const searchHistoryRouter = require("./routers/searchHistory");
+app.use("/searchhistory", searchHistoryRouter);
+
 // Listen for connections on specified port (default is port 4000)
 
 app.listen(PORT, () => {
