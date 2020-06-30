@@ -152,6 +152,9 @@ app.post("/authorized_post_request", authMiddleWare, (req, res) => {
 
 app.use("/", authRouter);
 
+const favouriteWordRouter = require("./routers/favouriteWord");
+app.use("/favouritewords", favouriteWordRouter);
+
 // Listen for connections on specified port (default is port 4000)
 
 app.listen(PORT, () => {
