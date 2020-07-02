@@ -1,4 +1,5 @@
 const { Router } = require("express");
+const authMiddleware = require("../auth/middleware");
 
 const User = require("../models").user;
 const FavouriteWord = require("../models/").favouriteWord;
@@ -33,6 +34,26 @@ router.get("/:userId", async (req, res) => {
   }
 
   res.status(200).send({ message: "ok", userProfile });
+});
+
+router.patch("/:userId", authMiddleware, async (req, res) => {
+  const user = await User.findByPk(req.params.userId, {
+    include: [SearchHistory, FavouriteWord],
+  });
+  if (!user.id === req.user.id) {
+    return res
+      .status(403)
+      .send({ message: "You are not authorized to update this homepage" });
+  }
+
+  const { name, email } = req.body;
+
+  const updatedProfile = await user.update({
+    name,
+    email,
+  });
+
+  return res.status(200).send({ updatedProfile });
 });
 
 module.exports = router;

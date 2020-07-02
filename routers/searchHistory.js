@@ -46,6 +46,29 @@ router.get("/:userId", async (req, res, next) => {
   }
 });
 
+router.delete("/:userId", authMiddleware, async (req, res) => {
+  try {
+    const userId = req.params.userId;
+    if (isNaN(parseInt(userId))) {
+      res.status(404).send("User ID is not a number");
+    }
+
+    const user = await User.findByPk(userId);
+
+    if (user === null) {
+      return res.status(404).send("User does not exist");
+    }
+
+    await SearchHistory.destroy({
+      where: { userId: userId },
+    });
+    res.status(200).send({ message: "Search history cleared" });
+  } catch (error) {
+    console.error(error);
+    return res.status(500).send({ message: "Something went wrong, sorry" });
+  }
+});
+
 router.post("/", async (req, res, next) => {
   try {
     const { searchWord, token } = req.body;
