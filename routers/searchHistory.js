@@ -7,8 +7,12 @@ const { toData } = require("../auth/jwt");
 const router = new Router();
 
 router.get("/", async (req, res, next) => {
+  const limit = req.query.limit || 30;
+  const offset = req.query.offset || 0;
   try {
     const searchWords = await SearchHistory.findAll({
+      limit,
+      offset,
       order: [["createdAt", "DESC"]],
     });
     res.status(200).send(searchWords);
