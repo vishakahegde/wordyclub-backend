@@ -32,7 +32,7 @@ router.get("/:userId", async (req, res) => {
   if (userProfile === null) {
     return res.status(404).send({ message: "userProfile not found" });
   }
-
+  delete userProfile.dataValues["password"]; // don't send back the password hash
   res.status(200).send({ message: "ok", userProfile });
 });
 

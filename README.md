@@ -2,13 +2,13 @@ This is a server for Wordy Club site. This site is a substitution for dictionary
 
 ## Learning Goals
 
-Database validation using sequelize models.
-Working with docker container to run postgres server.
-Implementing Relations, adding them to sequelize models.
-Generating seeder data.
-Implementing routes in express.
-Separating routes using express Router.
-Using auth middleware to manage authorization routes for routes in express.
+- Database validation using sequelize models.
+- Working with docker container to run postgres server.
+- Implementing Relations, adding them to sequelize models.
+- Generating seeder data.
+- Implementing routes in express.
+- Separating routes using express Router.
+- Using auth middleware to manage authorization routes for routes in express.
 
 ## Endpoints
 
@@ -27,6 +27,10 @@ Using auth middleware to manage authorization routes for routes in express.
 | GET    | '/searchhistory'           | Retrieve all search words                 | none                  | no   |
 | GET    | '/searchhistory/:userId'   | Retrieve search words based on User ID    | userId                | no   |
 | POST   | '/searchhistory'           | Insert search word into database          | searchWord            | no   |
+| DELETE | '/searchhistory/:userId'   | Delete search word history from database  | userId                | yes  |
+| GET    | '/profiles'                | Retrieve all user data                    | none                  | no   |
+| GET    | '/profiles/:userId'        | Retrieve user data based on User ID       | userId                | no   |
+| PATCH  | '/profiles/:userId'        | Update user profile                       | name, email, userId   | yes  |
 
 ## Database Model Chart
 
